@@ -128,4 +128,19 @@
         <!-- 注入WebBindingInitializer实现 -->
         <property name="webBindingInitializer" ref="myWebBindingInitializer"/>
     </bean>
+
+    <!--messageSource：用于获取错误码对应的错误消息的，而且bean名字默认必须是messageSource-->
+    <bean id="messageSource"
+          class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename"  value="classpath:messages" />
+        <property name="fileEncodings" value="utf-8"/>
+        <property name="cacheSeconds" value="120"/>
+    </bean>
+    <bean name="/error" class="com.ssm.chapter4.controller.ErrorController"/>
+
+    <bean name="/dataBindError"
+          class="com.ssm.chapter4.controller.DataBinderErrorTestController">
+        <property name="formView" value="bindAndValidate/input"/>
+        <property name="successView" value="bindAndValidate/success"/>
+    </bean>
 </beans>
