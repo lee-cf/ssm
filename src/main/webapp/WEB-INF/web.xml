@@ -32,7 +32,7 @@
 
   <servlet>
     <servlet-name>forwarding</servlet-name>
-    <servlet-class>com.ssm.controller.chapter4.ForwardingServlet</servlet-class>
+    <servlet-class>com.ssm.chapter4.controller.ForwardingServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:chapter4-spring.xml</param-value>

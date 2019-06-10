@@ -1,4 +1,4 @@
-package com.ssm.controller.chapter4;
+package com.ssm.chapter4.controller;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

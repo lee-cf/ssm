@@ -17,7 +17,7 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     <!-- 处理器 -->
-    <bean name="/hello" class="com.ssm.controller.chapter4.HelloWordController">
+    <bean name="/hello" class="com.ssm.chapter4.controller.HelloWordController">
         <!-- 以上配置表示只支持POST请求，如果是GET请求客户端将收到“HTTP Status 405 - Request method 'GET' not supported” -->
         <!--
         <property name="supportedMethods" value="POST"></property>
@@ -29,7 +29,7 @@
     </bean>
     <!-- 在chapter4-servlet.xml配置处理器 -->
     <bean name="/helloLastModified"
-          class="com.ssm.controller.chapter4.HelloWorldLastModifiedCacheController"/>
+          class="com.ssm.chapter4.controller.HelloWorldLastModifiedCacheController"/>
 
     <!-- 在chapter4-servlet.xml配置处理器 -->
     <bean name="/forwardToServlet"
@@ -40,28 +40,28 @@
 
     <!-- 在chapter4-servlet.xml配置处理器 -->
     <bean name="/abstractCommand"
-          class="com.ssm.controller.chapter4.MyAbstractCommandController">
+          class="com.ssm.chapter4.controller.MyAbstractCommandController">
         <!-- 也可以通过依赖注入 注入命令实现类 -->
         <!-- property name="commandClass" value="cn.javass.chapter4.model.UserModel"/-->
     </bean>
     <!-- 表单控制器 -->
     <bean name="/simpleForm"
-          class="com.ssm.controller.chapter4.RegisterSimpleFormController">
+          class="com.ssm.chapter4.controller.RegisterSimpleFormController">
         <property name="formView" value="register"/>
         <property name="successView" value="redirect:/success"/>
     </bean>
-    <bean name="/success" class="com.ssm.controller.chapter4.SuccessController"/>
+    <bean name="/success" class="com.ssm.chapter4.controller.SuccessController"/>
     <!--含有取消功能的表单控制器-->
     <bean name="/canCancelForm"
-          class="com.ssm.controller.chapter4.CanCancelRegisterSimpleFormController">
+          class="com.ssm.chapter4.controller.CanCancelRegisterSimpleFormController">
         <property name="formView" value="register"/>
         <property name="successView" value="redirect:/success"/>
         <property name="cancelView" value="redirect:/cancel"/>
     </bean>
-    <bean name="/cancel" class="com.ssm.controller.chapter4.CancelController"/>
+    <bean name="/cancel" class="com.ssm.chapter4.controller.CancelController"/>
     <!--步骤引导控制器-->
     <bean name="/infoFillWizard"
-          class="com.ssm.controller.chapter4.InfoFillWizardFormController">
+          class="com.ssm.chapter4.controller.InfoFillWizardFormController">
         <property name="pages">
             <list>
                 <value>wizard/baseInfo</value>
@@ -78,8 +78,8 @@
 
     <!--MultiActionController-->
     <!--默认使用InternalPathMethodNameResolver解析请求URL到功能方法名-->
-    <bean id="userService" class="com.ssm.service.chapter4.UserService"/>
-    <bean name="/user/**" class="com.ssm.controller.chapter4.UserController">
+    <bean id="userService" class="com.ssm.chapter4.service.UserService"/>
+    <bean name="/user/**" class="com.ssm.chapter4.controller.UserController">
         <property name="userService" ref="userService"/>
         <property name="createView" value="user/create"/>
         <property name="updateView" value="user/update"/>
@@ -91,7 +91,7 @@
     </bean>
 
     <!--委托对象-->
-    <bean id="userDelegate" class="com.ssm.controller.chapter4.UserDelegate">
+    <bean id="userDelegate" class="com.ssm.chapter4.controller.UserDelegate">
         <property name="userService" ref="userService"/>
         <property name="createView" value="user2/create"/>
         <property name="updateView" value="user2/update"/>
@@ -120,5 +120,12 @@
         </property>
         <!--4、默认执行的功能处理方法 -->
         <property name="defaultMethodName" value="list"/>
+    </bean>
+
+    <!-- 注册WebBindingInitializer实现 -->
+    <bean id="myWebBindingInitializer" class="com.ssm.chapter4.controller.support.initializer.MyWebBindingInitializer"/>
+    <bean name="/dataBind" class="com.ssm.chapter4.controller.DataBinderTestController">
+        <!-- 注入WebBindingInitializer实现 -->
+        <property name="webBindingInitializer" ref="myWebBindingInitializer"/>
     </bean>
 </beans>

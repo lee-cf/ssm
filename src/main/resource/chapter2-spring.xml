@@ -17,6 +17,6 @@
         <property name="suffix" value=".jsp"/>
     </bean>
     <!-- 处理器 -->
-    <bean name="/hello" class="com.ssm.controller.chapter2.HelloWordController"/>
+    <bean name="/hello" class="com.ssm.chapter2.HelloWordController"/>
 
 </beans>

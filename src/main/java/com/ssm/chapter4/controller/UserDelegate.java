@@ -1,9 +1,8 @@
-package com.ssm.controller.chapter4;
+package com.ssm.chapter4.controller;
 
-import com.ssm.controller.chapter4.model.UserModel;
-import com.ssm.service.chapter4.UserService;
+import com.ssm.chapter4.model.UserModel;
+import com.ssm.chapter4.service.UserService;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

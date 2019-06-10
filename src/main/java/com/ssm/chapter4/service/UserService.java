@@ -1,6 +1,6 @@
-package com.ssm.service.chapter4;
+package com.ssm.chapter4.service;
 
-import com.ssm.controller.chapter4.model.UserModel;
+import com.ssm.chapter4.model.UserModel;
 
 import java.util.List;
 

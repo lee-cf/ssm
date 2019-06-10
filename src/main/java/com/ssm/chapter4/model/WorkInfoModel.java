@@ -1,4 +1,4 @@
-package com.ssm.controller.chapter4.model;
+package com.ssm.chapter4.model;
 
 public class WorkInfoModel {
     private String city; //所在城市

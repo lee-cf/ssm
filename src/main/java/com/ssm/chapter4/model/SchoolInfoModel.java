@@ -1,4 +1,4 @@
-package com.ssm.controller.chapter4.model;
+package com.ssm.chapter4.model;
 
 public class SchoolInfoModel {
     private String schoolType; //学校类型：高中、中专、大学

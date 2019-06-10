@@ -1,4 +1,4 @@
-package com.ssm.controller.chapter2;
+package com.ssm.chapter2;
 
 
 import org.springframework.web.servlet.ModelAndView;

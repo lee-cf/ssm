@@ -1,6 +1,6 @@
-package com.ssm.controller.chapter4;
+package com.ssm.chapter4.controller;
 
-import com.ssm.controller.chapter4.model.UserModel;
+import com.ssm.chapter4.model.UserModel;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import javax.servlet.http.HttpServletRequest;
