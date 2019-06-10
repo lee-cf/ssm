@@ -11,7 +11,7 @@ public class HelloWordController implements Controller {
     @Override
     public ModelAndView handleRequest(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         ModelAndView mv = new ModelAndView();
-        mv.addObject("message", "Hello World!");
+        mv.addObject("message", "Hello lcf!");
         mv.setViewName("hello");
         return mv;
     }

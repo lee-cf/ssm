@@ -6,6 +6,6 @@
     <title>Hello World</title>
 </head>
 <body>
-${message}
+${user.username }-${user.password }
 </body>
 </html>  

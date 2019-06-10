@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- HandlerMapping -->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+    <!-- HandlerAdapter -->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <!-- ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- 处理器 -->
+    <bean name="/hello" class="com.ssm.controller.chapter4.HelloWordController">
+        <!-- 以上配置表示只支持POST请求，如果是GET请求客户端将收到“HTTP Status 405 - Request method 'GET' not supported” -->
+        <!--
+        <property name="supportedMethods" value="POST"></property>
+        -->
+        <!-- 当前请求的session前置条件检查，如果当前请求无session将抛出HttpSessionRequiredException异常 -->
+        <property name="requireSession" value="true"/>
+        <!--配置表示告诉浏览器缓存5秒钟 -->
+        <property name="cacheSeconds" value="5"/>
+    </bean>
+    <!-- 在chapter4-servlet.xml配置处理器 -->
+    <bean name="/helloLastModified"
+          class="com.ssm.controller.chapter4.HelloWorldLastModifiedCacheController"/>
+
+    <!-- 在chapter4-servlet.xml配置处理器 -->
+    <bean name="/forwardToServlet"
+          class="org.springframework.web.servlet.mvc.ServletForwardingController">
+        <property name="servletName" value="forwarding"></property>
+    </bean>
+
+
+    <!-- 在chapter4-servlet.xml配置处理器 -->
+    <bean name="/abstractCommand"
+          class="com.ssm.controller.chapter4.MyAbstractCommandController">
+        <!-- 也可以通过依赖注入 注入命令实现类 -->
+        <!-- property name="commandClass" value="cn.javass.chapter4.model.UserModel"/-->
+    </bean>
+
+    <bean name="/simpleForm"
+          class="com.ssm.controller.chapter4.RegisterSimpleFormController">
+        <property name="formView" value="register"/>
+        <property name="successView" value="redirect:/success"/>
+    </bean>
+    <bean name="/success" class="com.ssm.controller.chapter4.SuccessController"/>
+
+    <bean name="/canCancelForm"
+          class="com.ssm.controller.chapter4.CanCancelRegisterSimpleFormController">
+        <property name="formView" value="register"/>
+        <property name="successView" value="redirect:/success"/>
+        <property name="cancelView" value="redirect:/cancel"/>
+    </bean>
+    <bean name="/cancel" class="com.ssm.controller.chapter4.CancelController"/>
+</beans>
