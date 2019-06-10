@@ -13,7 +13,7 @@
     <!-- ViewResolver -->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="prefix" value="/WEB-INF/chapter4/jsp/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
     <!-- 处理器 -->
@@ -44,14 +44,14 @@
         <!-- 也可以通过依赖注入 注入命令实现类 -->
         <!-- property name="commandClass" value="cn.javass.chapter4.model.UserModel"/-->
     </bean>
-
+    <!-- 表单控制器 -->
     <bean name="/simpleForm"
           class="com.ssm.controller.chapter4.RegisterSimpleFormController">
         <property name="formView" value="register"/>
         <property name="successView" value="redirect:/success"/>
     </bean>
     <bean name="/success" class="com.ssm.controller.chapter4.SuccessController"/>
-
+    <!--含有取消功能的表单控制器-->
     <bean name="/canCancelForm"
           class="com.ssm.controller.chapter4.CanCancelRegisterSimpleFormController">
         <property name="formView" value="register"/>
@@ -59,4 +59,66 @@
         <property name="cancelView" value="redirect:/cancel"/>
     </bean>
     <bean name="/cancel" class="com.ssm.controller.chapter4.CancelController"/>
+    <!--步骤引导控制器-->
+    <bean name="/infoFillWizard"
+          class="com.ssm.controller.chapter4.InfoFillWizardFormController">
+        <property name="pages">
+            <list>
+                <value>wizard/baseInfo</value>
+                <value>wizard/schoolInfo</value>
+                <value>wizard/workInfo</value>
+            </list>
+        </property>
+    </bean>
+    <!--参数化视图控制器，不进行功能处理（即静态视图），根据参数的逻辑视图名直接选择需要展示的视图。 -->
+    <bean name="/parameterizableView"
+          class="org.springframework.web.servlet.mvc.ParameterizableViewController">
+        <property name="viewName" value="success"/>
+    </bean>
+
+    <!--MultiActionController-->
+    <!--默认使用InternalPathMethodNameResolver解析请求URL到功能方法名-->
+    <bean id="userService" class="com.ssm.service.chapter4.UserService"/>
+    <bean name="/user/**" class="com.ssm.controller.chapter4.UserController">
+        <property name="userService" ref="userService"/>
+        <property name="createView" value="user/create"/>
+        <property name="updateView" value="user/update"/>
+        <property name="deleteView" value="user/delete"/>
+        <property name="listView" value="user/list"/>
+        <property name="redirectToListView" value="redirect:/user/list"/>
+        <!-- 使用PropertiesMethodNameResolver来解析功能处理方法名 -->
+        <!--property name="methodNameResolver" ref="propertiesMethodNameResolver"/-->
+    </bean>
+
+    <!--委托对象-->
+    <bean id="userDelegate" class="com.ssm.controller.chapter4.UserDelegate">
+        <property name="userService" ref="userService"/>
+        <property name="createView" value="user2/create"/>
+        <property name="updateView" value="user2/update"/>
+        <property name="deleteView" value="user2/delete"/>
+        <property name="listView" value="user2/list"/>
+        <property name="redirectToListView" value="redirect:/user2/list"/>
+    </bean>
+    <!--控制器对象-->
+    <bean name="/user2/**"
+          class="org.springframework.web.servlet.mvc.multiaction.MultiActionController">
+        <property name="delegate" ref="userDelegate"/>
+        <property name="methodNameResolver" ref="parameterMethodNameResolver"/>
+    </bean>
+    <!--ParameterMethodNameResolver -->
+    <bean id="parameterMethodNameResolver"
+          class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
+        <!-- 1、根据请求参数名解析功能方法名 -->
+        <property name="methodParamNames" value="create,update,delete"/>
+        <!-- 2、根据请求参数名的值解析功能方法名 -->
+        <property name="paramName" value="action"/>
+        <!-- 3、逻辑方法名到真实方法名的映射 -->
+        <property name="logicalMappings">
+            <props>
+                <prop key="doList">list</prop>
+            </props>
+        </property>
+        <!--4、默认执行的功能处理方法 -->
+        <property name="defaultMethodName" value="list"/>
+    </bean>
 </beans>

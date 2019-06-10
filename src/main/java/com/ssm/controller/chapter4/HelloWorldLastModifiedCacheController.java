@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * 可以判断是否修改的控制器
+ */
 public class HelloWorldLastModifiedCacheController extends AbstractController implements LastModified {
     private long lastModified;
     @Override

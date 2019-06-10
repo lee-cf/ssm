@@ -11,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 包含取消操作的表单控制器
+ */
 public class CanCancelRegisterSimpleFormController extends CancellableFormController {
     public CanCancelRegisterSimpleFormController() {
         setCommandClass(UserModel.class); //设置命令对象实现类

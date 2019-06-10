@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 提交表单的控制器
+ */
 public class RegisterSimpleFormController extends SimpleFormController {
     public RegisterSimpleFormController() {
         setCommandClass(UserModel.class); //设置命令对象实现类
