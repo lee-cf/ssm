@@ -143,4 +143,13 @@
         <property name="formView" value="bindAndValidate/input"/>
         <property name="successView" value="bindAndValidate/success"/>
     </bean>
+
+    <bean id="userModelValidator"
+          class="com.ssm.chapter4.controller.support.validator.UserModelValidator"/>
+    <bean name="/validator"
+          class="com.ssm.chapter4.controller.RegisterSimpleFormController">
+        <property name="formView" value="registerAndValidator"/>
+        <property name="successView" value="redirect:/success"/>
+        <property name="validator" ref="userModelValidator"/>
+    </bean>
 </beans>
