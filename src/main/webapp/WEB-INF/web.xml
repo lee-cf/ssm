@@ -6,7 +6,7 @@
 
   <display-name>Archetype Created Web Application</display-name>
 
-  <!-- ETag（实体标记）缓存机制  对返回的内容进行MD5，如果没有变化返回304 -->
+  <!-- ETag（实体标记）缓存机制  对返回的内容进行MD5，如果没有变化返回304
   <filter>
     <filter-name>etagFilter</filter-name>
     <filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>
@@ -15,13 +15,13 @@
     <filter-name>etagFilter</filter-name>
     <servlet-name>ssm</servlet-name>
   </filter-mapping>
-
+-->
   <servlet>
     <servlet-name>ssm</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:chapter4-spring.xml</param-value>
+      <param-value>classpath:chapter5-spring.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
@@ -29,7 +29,7 @@
     <servlet-name>ssm</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-
+<!-- 转发
   <servlet>
     <servlet-name>forwarding</servlet-name>
     <servlet-class>com.ssm.chapter4.controller.ForwardingServlet</servlet-class>
@@ -39,7 +39,7 @@
     </init-param>
     <load-on-startup>2</load-on-startup>
   </servlet>
-
+-->
 
 </web-app>
 

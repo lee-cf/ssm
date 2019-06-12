@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- HandlerMapping -->
+    <!--配置拦截器-->
+    <bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+        <property name="interceptors">
+            <list>
+                <ref bean="handlerInterceptor1"/>
+                <ref bean="handlerInterceptor2"/>
+                <ref bean="stopWatchHandlerInterceptor"/>
+            </list>
+        </property>
+    </bean>
+
+    <!-- HandlerAdapter -->
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+
+    <!-- ViewResolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/chapter5/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+    <!-- 处理器 -->
+    <bean name="/test" class="com.ssm.chapter5.controller.TestController"/>
+    <bean id="handlerInterceptor1"
+          class="com.ssm.chapter5.interceptor.HandlerInterceptor1"/>
+    <bean id="handlerInterceptor2"
+          class="com.ssm.chapter5.interceptor.HandlerInterceptor2"/>
+    <bean id="stopWatchHandlerInterceptor"
+          class="com.ssm.chapter5.interceptor.StopWatchHandlerInterceptor "/>
+
+
+
+</beans>
